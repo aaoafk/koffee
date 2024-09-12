@@ -1,0 +1,27 @@
+<%= form_with model: reservation, data: { turbo: false }, class: "mb-4" do |form| %>
+  <% if reservation.errors.any? %>
+    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+      <h2><%= pluralize(reservation.errors.count, "error") %> prohibited this reservation from being saved:</h2>
+      <ul>
+        <% reservation.errors.full_messages_for(:name).each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        <% reservation.errors.full_messages_for(:day).each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-2">
+    <%= form.label :name, class: "block" %>
+    <%= form.text_field :name, class: "border rounded px-2 py-1 w-full" %>
+  </div>
+
+  <div class="mb-2">
+    <%= form.label :day, class: "block" %>
+    <%= form.select :day, options_for_select(%w(Monday Tuesday Wednesday Thursday Friday), reservation.day), {}, class: "border rounded px-2 py-1" %>
+  </div>
+
+  <%= form.submit class: "bg-blue-500 text-white px-4 py-2 rounded" %>
+<% end %>
