@@ -9,13 +9,26 @@
         <% reservation.errors.full_messages_for(:day).each do |message| %>
           <li><%= message %></li>
         <% end %>
+
+        <% reservation.errors.full_messages_for(:base).each do |message| %>
+          <li><%= message %></li>
+        <% end %>
       </ul>
     </div>
   <% end %>
 
-  <div class="mb-2">
-    <%= form.label :name, class: "block" %>
-    <%= form.text_field :name, class: "border rounded px-2 py-1 w-full" %>
+  <div class="mb-4">
+    <%= form.label :name, class: "block text-sm font-medium text-gray-700" %>
+			<%= form.text_field :name,
+			 value: "",
+			 list: "preset-names",
+			 autocomplete: "on",
+			class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" %>
+			<datalist id="preset-names">
+					<% @names.each do |name| %>
+							<option value="<%= name.value %>">
+					<% end %>
+			</datalist>
   </div>
 
   <div class="mb-2">

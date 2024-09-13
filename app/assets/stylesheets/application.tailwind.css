@@ -6,6 +6,14 @@
 		font-display: swap;
 }
 
+@font-face {
+		font-family: 'Nunito';
+		src: url('/Nunito.ttf') format('ttf');
+		font-weight: normal;
+		font-style: normal;
+		font-display: swap;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

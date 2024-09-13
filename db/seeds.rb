@@ -7,3 +7,7 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+%w[Lauren Kyle SamB Rolando SamD Stefan Daniel David Jens James Rhea Sid Jack Jeremy Heriberto Jonathan Shane Mark Brian].each do |name| 
+  Name.create(value: name)
+end

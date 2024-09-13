@@ -8,10 +8,9 @@ module.exports = {
     './app/views/**/*.{erb,haml,html,slim}'
   ],
   theme: {
-    extend: {
-      fontFamily: {
-					'virgil': ['Virgil, sans-serif'] // Adds a new font-display class
-      },
-    },
+			fontFamily: {
+					sans: ['Virgil, sans-serif', ...defaultTheme.fontFamily.sans], // Adds a new font-display class
+					serif: ['Nunito, sans-serif', ...defaultTheme.fontFamily.serif]
+			}
   }
 }
