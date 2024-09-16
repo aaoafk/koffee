@@ -1,7 +1,7 @@
 class Reservation < ApplicationRecord
   belongs_to :name
   validates :day, presence: true, inclusion: { in: %w(Monday Tuesday Wednesday Thursday Friday) }
-  validates :user_id, presence: true
+  #validates :user_id, presence: true
   validate :max_five_reservations_per_day
   validate :one_reservation_per_name_per_day
 

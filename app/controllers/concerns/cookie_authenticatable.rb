@@ -1,3 +1,4 @@
+# @user_info : hash
 module CookieAuthenticatable
   extend ActiveSupport::Concern
 
@@ -8,30 +9,27 @@ module CookieAuthenticatable
   private
 
   def set_current_user
-    set_or_generate_user_id_from_cookie
-    Current.user_id ||= decode_cookie['user_id']
-    Current.ip_address ||= request.remote_ip
-    Current.user_agent ||= request.user_agent
+    extract_or_initialize_cookie
+    Current.user_id ||= @user_info['user_id']
+    Current.ip_address ||= @user_info['ip_address']
+    Current.user_agent ||= @user_info['user_agent']
   end
 
-  def set_or_generate_user_id_from_cookie
-    @user_id = decode_cookie || generate_user_id
-    set_cookie(@user_id)
+  def extract_or_initialize_cookie
+    if @user_info
+      return @user_info
+    else
+      initialize_cookie && extract_cookie
+    end
   end
 
-  def generate_user_id
-    SecureRandom.uuid
+  def extract_cookie
+    @user_info = JSON.parse(cookies.signed[:user_info])
+    return true unless (@user_info.nil? || @user_info.empty?)
   end
 
-  def decode_cookie
-    JWT.decode(cookies.signed[:user_id], Rails.application.secrets.secret_key_base, true, { algorithm: 'HS256' })[0] # Array @ 0 idx is the payload
-  rescue JWT::DecodeError
-    nil
+  def initialize_cookie
+    token = { "user_id" => SecureRandom.uuid, "ip_address" => request.remote_ip, "user_agent" => request.user_agent }
+    cookies.signed[:user_info] = { value: JSON.generate(token), expires: 1.year.from_now, httponly: true }
   end
-
-  def set_cookie(user_id)
-    token = JWT.encode({ user_id: user_id, ip_address: request.remote_ip, user_agent: request.user_agent }, Rails.application.secrets.secret_key_base, 'HS256')
-    cookies.signed[:user_id] = { value: token, expires: 1.year.from_now, httponly: true }
-  end
-
 end

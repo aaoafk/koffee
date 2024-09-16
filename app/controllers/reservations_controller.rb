@@ -1,5 +1,5 @@
 class ReservationsController < ApplicationController
-  # TODO: ActionDispatch::Cookies::CookieOverflow in ReservationsController#new sometimes
+  # TODO: Set the `user_id` from cookies for the reservation since it is used in validations
   before_action :set_reservation, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -16,7 +16,7 @@ class ReservationsController < ApplicationController
 
   def create
     @names = Name.all
-    name = Name.find_by value: params[:reservation][:name]
+    name = Name.find_by(value: params[:reservation][:name])
     @reservation = Reservation.new(reservation_params.merge(name: name))
     if @reservation.save
       redirect_to reservations_path, notice: 'Your Koffee reservation was successfully created.'
@@ -46,7 +46,6 @@ class ReservationsController < ApplicationController
   def set_reservation
     @reservation = Reservation.find(params[:id])
   end
-
 
   def reservation_params
     params.require(:reservation).permit(:day, :name).merge(user_id: @user_id)

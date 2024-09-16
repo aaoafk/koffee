@@ -4,11 +4,6 @@ class ApplicationController < ActionController::Base
   before_action :can_edit, only: [:edit, :update, :destroy]
 
   private
-  
-  # def can_edit?
-  #   curr_cookie = decode_cookie
-  #   curr_cookie['ip_address'] == Current.remote_ip && curr_cookie['user_agent'] == Current.user_agent
-  # end
 
   def can_edit
     if @reservation&.user_id == Current.user_id
