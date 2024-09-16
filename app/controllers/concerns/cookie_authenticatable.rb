@@ -9,27 +9,25 @@ module CookieAuthenticatable
   private
 
   def set_current_user
-    extract_or_initialize_cookie
-    Current.user_id ||= @user_info['user_id']
-    Current.ip_address ||= @user_info['ip_address']
-    Current.user_agent ||= @user_info['user_agent']
+    user_info = extract_or_initialize_cookie
+    Current.user_id ||= user_info['user_id']
+    Current.ip_address ||= user_info['ip_address']
+    Current.user_agent ||= user_info['user_agent']
   end
 
   def extract_or_initialize_cookie
-    if @user_info
-      return @user_info
-    else
-      initialize_cookie && extract_cookie
-    end
+    initialize_cookie && extract_cookie
   end
 
   def extract_cookie
-    @user_info = JSON.parse(cookies.signed[:user_info])
-    return true unless (@user_info.nil? || @user_info.empty?)
+    JSON.parse(cookies.signed[:user_info])
   end
 
   def initialize_cookie
-    token = { "user_id" => SecureRandom.uuid, "ip_address" => request.remote_ip, "user_agent" => request.user_agent }
-    cookies.signed[:user_info] = { value: JSON.generate(token), expires: 1.year.from_now, httponly: true }
+    if cookies.signed[:user_info].nil?
+      token = { "user_id" => SecureRandom.uuid, "ip_address" => request.remote_ip, "user_agent" => request.user_agent }
+      cookies.signed[:user_info] = { value: JSON.generate(token), expires: 1.year.from_now, httponly: true }
+    end
+    true
   end
 end

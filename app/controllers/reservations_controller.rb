@@ -1,8 +1,8 @@
 class ReservationsController < ApplicationController
-  # TODO: Set the `user_id` from cookies for the reservation since it is used in validations
-  before_action :set_reservation, only: [:show, :edit, :update, :destroy]
+  before_action :set_reservation, only: [:show, :destroy]
 
   def index
+    @names = Name.all
     @reservations = Reservation.all.order(:day)
   end
 
@@ -25,19 +25,8 @@ class ReservationsController < ApplicationController
     end
   end
 
-  def edit
-  end
-
-  def update
-    if @reservation.update(reservation_params)
-      redirect_to reservations_path(@reservation), notice: 'Your Koffee reservation was successfully updated.'
-    else
-      render :edit, status: :unprocessable_entity
-    end
-  end
-
   def destroy
-    @reservation.destroy
+    @reservation.destroy!
     redirect_to root_path, notice: 'Your Koffee reservation was successfully deleted.', status: :see_other
   end
 
@@ -48,6 +37,6 @@ class ReservationsController < ApplicationController
   end
 
   def reservation_params
-    params.require(:reservation).permit(:day, :name).merge(user_id: @user_id)
+    params.require(:reservation).permit(:day, :name).merge(user_id: Current.user_id)
   end
 end
