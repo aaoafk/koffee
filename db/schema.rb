@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_13_145757) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_16_223645) do
   create_table "names", force: :cascade do |t|
     t.string "value"
     t.datetime "created_at", null: false
@@ -24,6 +24,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_13_145757) do
     t.string "name"
     t.string "user_id"
     t.integer "name_id", null: false
+    t.boolean "expired"
     t.index ["name_id"], name: "index_reservations_on_name_id"
   end
 

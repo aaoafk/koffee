@@ -9,6 +9,9 @@ gem "rails", github: "rails/rails", branch: "7-1-stable"
 gem "propshaft"
 
 # Use sqlite3 as the database for Active Record
+# TODO: Switch to the enhanced sqlite3 adapter from fractaledmind
+# TODO: Deploy to `meseta.nyc/koffee` I wonder if I can just spawn that application and then route to it from nginx process for
+# the main website
 gem "sqlite3", "~> 1.4"
 
 # Use the Puma web server [https://github.com/puma/puma]
@@ -40,6 +43,9 @@ gem "tzinfo-data", platforms: %i[ windows jruby ]
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
+
+# Crontab support
+# gem "whenever", require: false
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

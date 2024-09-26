@@ -1,11 +1,11 @@
 <div class="container mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center min-h-screen">
   <div class="bg-white shadow-md rounded-lg p-8 max-w-md w-full">
-    <h1 class="text-3xl font-bold mb-6 font-virgil text-gray-800 text-center"><%= action_name.capitalize %> Koffee Reservation</h1>
+    <h1 class="font-bold mb-6 font-virgil text-gray-800 text-center"><%= action_name.capitalize %> Koffee Reservation</h1>
 
     <%= render 'form', reservation: @reservation %>
 
     <div class="text-center mt-6">
-      <%= link_to "Back", reservations_path, class: "bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded transition duration-300 ease-in-out inline-block" %>
+      <%= link_to "Back", reservations_path, class: "font-nunito bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded transition duration-300 ease-in-out inline-block" %>
     </div>
   </div>
 </div>

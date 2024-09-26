@@ -4,6 +4,7 @@ class ReservationsController < ApplicationController
   def index
     @names = Name.all
     @reservations = Reservation.all.order(:day)
+    @reservations_exist = Reservation.count > 0
   end
 
   def show

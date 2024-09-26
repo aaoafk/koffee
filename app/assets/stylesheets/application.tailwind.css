@@ -1,3 +1,5 @@
+html { font-size: 24px }
+
 @font-face {
 		font-family: 'Virgil';
 		src: url('/Virgil.woff2') format('woff2');
@@ -7,8 +9,8 @@
 }
 
 @font-face {
-		font-family: 'Nunito';
-		src: url('/Nunito.ttf') format('ttf');
+		font-family: 'Nunito Sans';
+		src: url('/Nunito Sans.ttf') format('ttf');
 		font-weight: normal;
 		font-style: normal;
 		font-display: swap;
