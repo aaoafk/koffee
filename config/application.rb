@@ -30,6 +30,7 @@ module Koffee
 
     # Configuration for the application, engines, and railties goes here.
     #
+    config.enhanced_sqlite3.isolate_connection_pools = true
     # These settings can be overridden in specific environments using the files
     # in config/environments, which are processed later.
     #

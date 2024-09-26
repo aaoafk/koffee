@@ -8,11 +8,9 @@ gem "rails", github: "rails/rails", branch: "7-1-stable"
 # The modern asset pipeline for Rails [https://github.com/rails/propshaft]
 gem "propshaft"
 
-# Use sqlite3 as the database for Active Record
-# TODO: Switch to the enhanced sqlite3 adapter from fractaledmind
 # TODO: Deploy to `meseta.nyc/koffee` I wonder if I can just spawn that application and then route to it from nginx process for
 # the main website
-gem "sqlite3", "~> 1.4"
+gem "activerecord-enhancedsqlite3-adapter", "~> 0.8.0"
 
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", ">= 5.0"
