@@ -2,21 +2,21 @@ class ReservationsController < ApplicationController
   before_action :set_reservation, only: [:show, :destroy]
 
   def index
-    @names = Name.all
-    @reservations = Reservation.all.order(:day)
-    @reservations_exist = Reservation.count > 0
+    @names ||= Name.all
+    @reservations ||= Reservation.all.order(:day)
+    @reservations_exist ||= Reservation.count > 0
   end
 
   def show
   end
 
   def new
-    @names = Name.all
+    @names ||= Name.all
     @reservation = Reservation.new
   end
 
   def create
-    @names = Name.all
+    @names ||= Name.all
     name = Name.find_by(value: params[:reservation][:name])
     @reservation = Reservation.new(reservation_params.merge(name: name))
     if @reservation.save

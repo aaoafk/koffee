@@ -5,7 +5,7 @@ require_relative "config/application"
 
 Rails.application.load_tasks
 
-# TODO: `koffee` leader board
+# `TODO: `koffee` leader board
 # 1. Add a expired boolean column to reservations table.
 # 2. On Monday 12:00am set a cron job that will set that boolean to true
 # 3. The `koffee` leader board will just be a tally of all expired reservations

@@ -1,5 +1,18 @@
 html { font-size: 24px }
 
+hr {
+  border: none;
+  border-top: 3px double #333;
+  overflow: visible;
+  text-align: center;
+}
+
+hr::after {
+  padding: 0 4px;
+  position: relative;
+  top: -13px;
+}
+
 @font-face {
 		font-family: 'Virgil';
 		src: url('/Virgil.woff2') format('woff2');
